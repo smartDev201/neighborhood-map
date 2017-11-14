@@ -29,7 +29,7 @@ body, html {
 }
 
 .sidenav li {
-    padding: 8px 0;
+    padding: 12px 0;
     cursor: pointer;
     transition: 0.3s;
 }
