@@ -43,6 +43,10 @@ body, html {
     margin-left: 50px;
 }
 
+.sidenav ul {
+    color: white;
+}
+
 #header {
     padding-top: 8px;
     padding-bottom: 8px;

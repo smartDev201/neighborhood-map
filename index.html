@@ -12,7 +12,9 @@
         <!--https://www.w3schools.com/howto/howto_js_sidenav.asp-->
         <div id="mySidenav" class="sidenav">
             <span class="closebtn" data-bind="click: closeNav">&#9776;</span>
-            <span><h1>Hello world!</h1></span>
+            <ul id="list" data-bind="foreach: placesArray">
+                <li data-bind="text: title"></li>
+            </ul>
         </div>
 
         <!-- Use any element to open the sidenav -->
@@ -28,7 +30,6 @@
         </div>
 
         <script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'></script>
-        <script src='js/app.js'></script>
         <script src='js/map.js'></script>
         <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1Lc8oG0MSyV4DNqRljDEdK_lWaBzHhEo&libraries=places&callback=initMap">
