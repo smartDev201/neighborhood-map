@@ -1,7 +1,7 @@
 let map;
 let service;
 let markers = [];
-let places = [];
+//let places = [];
 
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
@@ -14,7 +14,7 @@ function initMap() {
 
     var request = {
         location: amsterdam,
-        radius: '5000',
+        radius: '4000',
         type: ['night_club']
     };
 
@@ -62,12 +62,12 @@ function callback(results, status) {
             let title = results[i].name;
             let vicinity = results[i].vicinity;
 
-            let place = {
-                title: title,
-                vicinity: vicinity
-            };
+//            let place = {
+//                title: title,
+//                vicinity: vicinity
+//            };
 
-            places.push(place);
+//            places.push(place);
 
             let marker = new google.maps.Marker({
                 position: myLatLng,
@@ -91,6 +91,7 @@ function callback(results, status) {
 
         // Extend the boundaries of the map for each marker
         map.fitBounds(bounds);
+
 
         let script;
         script = document.createElement('script');

@@ -1,7 +1,11 @@
-var Place = function(data) {
-    this.title = ko.observable(data.title);
-    this.vicinity = ko.observable(data.vicinity);
-}
+//var Place = function(data) {
+//    this.title = ko.observable(data.title);
+//    this.vicinity = ko.observable(data.vicinity);
+//    this.position = ko.observable(data.position);
+//    this.map = ko.observable(data.map);
+//    animation: google.maps.Animation.DROP,
+//    id: i
+//}
 
 var ViewModel = function() {
 
@@ -21,10 +25,14 @@ var ViewModel = function() {
 
     this.placesArray = ko.observableArray([]);
 
-    places.forEach(function(place) {
-        self.placesArray.push(new Place(place));
+    markers.forEach(function(place) {
+        self.placesArray.push(place);
     });
 
+    this.triggerClick = function(marker) {
+        google.maps.event.trigger(marker, 'click');
+        self.closeNav();
+    };
 
 
 //    this.addPlacesArray = function() {

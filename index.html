@@ -13,7 +13,7 @@
         <div id="mySidenav" class="sidenav">
             <span class="closebtn" data-bind="click: closeNav">&#9776;</span>
             <ul id="list" data-bind="foreach: placesArray">
-                <li data-bind="text: title"></li>
+                <li data-bind="text: title, click: function() { $parent.triggerClick($data) }"></li>
             </ul>
         </div>
 
