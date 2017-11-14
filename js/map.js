@@ -27,8 +27,8 @@ function initMap() {
   // on that markers position.
 function populateInfoWindow(marker, infowindow) {
     // Check to make sure the infowindow is not already opened on this marker.
-    let content = `<div>${marker.title}<br>
-            ${marker.position}
+    let content = `<div><h3>${marker.title}</h3><br>
+            ${marker.vicinity}
         </div>`
 
     if (infowindow.marker != marker) {
@@ -62,6 +62,7 @@ function callback(results, status) {
                 position: myLatLng,
                 map: map,
                 title: results[i].name,
+                vicinity: results[i].vicinity,
                 animation: google.maps.Animation.DROP,
                 id: i
             });
@@ -74,6 +75,8 @@ function callback(results, status) {
             });
 
             bounds.extend(markers[i].position);
+
+            console.log(results[i]);
         }
 
         // Extend the boundaries of the map for each marker
