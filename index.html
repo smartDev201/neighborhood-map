@@ -11,17 +11,13 @@
 
         <!--https://www.w3schools.com/howto/howto_js_sidenav.asp-->
         <div id="mySidenav" class="sidenav">
-            <span class="closebtn" onclick="closeNav()">&#9776;</span>
+            <span class="closebtn" data-bind="click: closeNav">&#9776;</span>
             <span><h1>Hello world!</h1></span>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
         </div>
 
         <!-- Use any element to open the sidenav -->
         <div id="header">
-            <span class="openbtn" onclick="openNav()">&#9776;</span>
+            <span class="openbtn" data-bind="click: openNav">&#9776;</span>
             <span class="headerTitle"><h1>Amsterdam Nightlife</h1></span>
         </div>
 
@@ -32,5 +28,6 @@
 
         <script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'></script>
         <script src='js/app.js'></script>
+
     </body>
 </html>
