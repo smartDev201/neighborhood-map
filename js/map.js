@@ -1,7 +1,6 @@
 let map;
 let service;
-let infowindow;
-
+let markers = [];
 
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
@@ -23,8 +22,33 @@ function initMap() {
 
 }
 
+  // This function populates the infowindow when the marker is clicked. We'll only allow
+  // one infowindow which will open at the marker that is clicked, and populate based
+  // on that markers position.
+function populateInfoWindow(marker, infowindow) {
+    // Check to make sure the infowindow is not already opened on this marker.
+    let content = `<div>${marker.title}<br>
+            ${marker.position}
+        </div>`
+
+    if (infowindow.marker != marker) {
+        infowindow.marker = marker;
+        infowindow.setContent(content);
+        infowindow.open(map, marker);
+        // Make sure the marker property is cleared if the infowindow is closed.
+        infowindow.addListener('closeclick',function(){
+            infowindow.setMarker = null;
+        });
+    }
+}
+
+
 function callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
+
+        let largeInfowindow = new google.maps.InfoWindow();
+        let bounds = new google.maps.LatLngBounds();
+
         for (var i = 0; i < results.length; i++) {
             let lat = results[i].geometry.location.lat();
             let lng = results[i].geometry.location.lng();
@@ -38,27 +62,22 @@ function callback(results, status) {
                 position: myLatLng,
                 map: map,
                 title: results[i].name,
-                animation: google.maps.Animation.DROP
+                animation: google.maps.Animation.DROP,
+                id: i
             });
 
-            console.log(results[i]);
+            markers.push(marker);
 
+            // Create an onclick event to open an infowindow at each marker.
+            marker.addListener('click', function() {
+                populateInfoWindow(this, largeInfowindow);
+            });
 
-//            var place = results[i];
-//            console.log(place.geometry.location);
-//            createMarker(results[i]);
+            bounds.extend(markers[i].position);
         }
+
+        // Extend the boundaries of the map for each marker
+        map.fitBounds(bounds);
+
     }
 }
-
-//let locations = https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyB1Lc8oG0MSyV4DNqRljDEdK_lWaBzHhEo&location=52.3702,4.8952&radius=30000&keyword=nightlife;
-//console.log(locations);
-
-const test = [
-  {name: 'Park Ave Penthouse', location: {lat: 40.7713024, lng: -73.9632393}},
-  {name: 'Chelsea Loft', location: {lat: 40.7444883, lng: -73.9949465}},
-  {name: 'Union Square Open Floor Plan', location: {lat: 40.7347062, lng: -73.9895759}},
-  {name: 'East Village Hip Studio', location: {lat: 40.7281777, lng: -73.984377}},
-  {name: 'TriBeCa Artsy Bachelor Pad', location: {lat: 40.7195264, lng: -74.0089934}},
-  {name: 'Chinatown Homey Space', location: {lat: 40.7180628, lng: -73.9961237}}
-];
