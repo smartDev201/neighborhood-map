@@ -7,7 +7,7 @@ body, html {
 /*https://www.w3schools.com/howto/howto_js_sidenav.asp*/
 /* The side navigation menu */
 .sidenav {
-    height: 100%; /* 100% Full-height */
+    height: 92%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     z-index: 1; /* Stay on top */
