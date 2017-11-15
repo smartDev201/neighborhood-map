@@ -18,12 +18,6 @@ function initMap() {
         type: ['night_club']
     };
 
-    google.maps.event.addDomListener(window, "resize", function() {
-        var center = map.getCenter();
-        google.maps.event.trigger(map, "resize");
-        map.setCenter(center);
-    });
-
     service = new google.maps.places.PlacesService(map);
     service.nearbySearch(request, callback);
 
@@ -99,6 +93,12 @@ function callback(results, status) {
         // Extend the boundaries of the map for each marker
         map.fitBounds(bounds);
 
+        google.maps.event.addDomListener(window, "resize", function() {
+            var center = map.getCenter();
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(center);
+            map.fitBounds(bounds);
+        });
 
         let script;
         script = document.createElement('script');
