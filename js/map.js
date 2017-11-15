@@ -15,8 +15,8 @@ function initMap() {
 
     var request = {
         location: amsterdam,
-        radius: '4000',
-        type: ['night_club']
+        radius: '1000',
+        type: ['restaurant']
     };
 
     service = new google.maps.places.PlacesService(map);
@@ -30,13 +30,46 @@ function initMap() {
   // on that markers position.
 function populateInfoWindow(marker, infowindow) {
     // Check to make sure the infowindow is not already opened on this marker.
-    let content = `<div><h3>${marker.title}</h3><br>
-            ${marker.vicinity}
+
+//    let request = {
+//      method: 'GET',
+//      client_id: 'S5A3QSAZPWULTNNOTN2QL0NPX4SG1OR5QRFTATHHPO4GXZEN',
+//      client_secret: 'DU0Z30UIE1PSCVHQT4DSOMGWRZTQKPAXTFBQXY3ZUZYQWFHO',
+//      ll: '40.7243,-74.0018',
+//      query: 'coffee',
+//      v: '20170801',
+//      limit: 1
+//    };
+
+    fetch(`https://api.foursquare.com/v2/venues/search?v=20170801&near=Amsterdam&query=${marker.title}&limit=1&client_id=S5A3QSAZPWULTNNOTN2QL0NPX4SG1OR5QRFTATHHPO4GXZEN&client_secret=DU0Z30UIE1PSCVHQT4DSOMGWRZTQKPAXTFBQXY3ZUZYQWFHO`).then(function(response) {
+        return response.json();
+    })
+    .then(function(response) {
+        let checkinsCount = response.response.venues[0].stats.checkinsCount;
+        let thisInfoWindow = document.querySelector('.infowindow');
+        thisInfoWindow.insertAdjacentHTML('beforeend', `<span>${checkinsCount} check-ins via <a href="https://foursquare.com/">Foursquare</a></span>`);
+        console.log(checkinsCount);
+    });
+//    , function(err, res, body) {
+//      if (err) {
+//        console.error(err);
+//      } else {
+//        console.log(body);
+//      }
+//    });
+
+
+
+
+    let content = `<div class="infowindow">
+            <h3>${marker.title}</h3><br>
+            ${marker.vicinity}<br>
         </div>`
 
     if (infowindow.marker != marker) {
         infowindow.marker = marker;
         infowindow.setContent(content);
+
         infowindow.open(map, marker);
         // Make sure the marker property is cleared if the infowindow is closed.
         infowindow.addListener('closeclick',function(){
