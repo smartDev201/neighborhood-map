@@ -83,6 +83,19 @@ body, html {
     height: 100%;
 }
 
+#showAllResults {
+    position: fixed;
+    top: 70.5px;
+    left: 125px;
+    background: black;
+    color: white;
+    border: black;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    cursor: pointer;
+    display: none;
+}
+
 .openbtn {
     padding-left: 20px;
     font-size: 36px;

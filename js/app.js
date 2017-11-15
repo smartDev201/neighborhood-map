@@ -23,6 +23,13 @@ var ViewModel = function() {
         document.getElementById("main").style.marginLeft = "0";
     };
 
+    this.showAllResults = function() {
+        self.markersArray().forEach(function(marker) {
+            marker.setVisible(true);
+        });
+        document.getElementById("showAllResults").style.display = "none";
+    };
+
     this.markersArray = ko.observableArray([]);
 
     markers.forEach(function(place) {
@@ -42,7 +49,7 @@ var ViewModel = function() {
             return self.markersArray();
 
         } else {
-          
+
             self.markersArrayFiltered().forEach(function(marker) {
                 marker.setVisible(false);
             });
@@ -70,6 +77,7 @@ var ViewModel = function() {
     this.triggerClick = function(marker) {
         google.maps.event.trigger(marker, 'click');
         self.closeNav();
+        document.getElementById("showAllResults").style.display = "inherit";
     };
 
 

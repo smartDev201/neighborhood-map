@@ -12,7 +12,7 @@
         <!--https://www.w3schools.com/howto/howto_js_sidenav.asp-->
         <div id="mySidenav" class="sidenav">
             <span class="closebtn" data-bind="click: closeNav">&#9776;</span>
-            <span><input data-bind="value: filter, valueUpdate: 'afterkeydown'" placeholder="Filter results"></span>
+            <span><input id="filterResults" data-bind="value: filter, valueUpdate: 'afterkeydown'" placeholder="Filter results"></span>
             <ul id="list" data-bind="foreach: markersArrayFiltered">
                 <li data-bind="text: title, click: function() { $parent.triggerClick($data) }"></li>
             </ul>
@@ -28,6 +28,7 @@
         <div id="main">
             <div id="map" data-bind="click: closeNav">
             </div>
+            <button id="showAllResults" name="showAllResults" type="button" data-bind="click: showAllResults">Show All Results</button>
         </div>
 
         <script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'></script>
