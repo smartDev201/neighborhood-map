@@ -84,6 +84,7 @@ function callback(results, status) {
             // Create an onclick event to open an infowindow at each marker.
             marker.addListener('click', function() {
                 populateInfoWindow(this, largeInfowindow);
+                toggleBounce(marker);
             });
 
             bounds.extend(markers[i].position);
@@ -107,4 +108,15 @@ function callback(results, status) {
 
     }
 
+}
+
+function toggleBounce(marker) {
+    if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+    } else {
+        markers.forEach(function(marker) {
+            marker.setAnimation(null);
+        });
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
 }
