@@ -23,11 +23,33 @@ var ViewModel = function() {
         document.getElementById("main").style.marginLeft = "0";
     };
 
-    this.placesArray = ko.observableArray([]);
+    this.markersArray = ko.observableArray([]);
 
     markers.forEach(function(place) {
-        self.placesArray.push(place);
+        self.markersArray.push(place);
     });
+
+    this.filter = ko.observable("");
+
+    // Filter the items using the filter text
+    self.markersArrayFiltered = ko.computed(function() {
+        let filter = self.filter().toLowerCase();
+        if (!filter) {
+            return self.markersArray();
+        } else {
+            return ko.utils.arrayFilter(self.markersArray(), function(item) {
+                return self.stringStartsWith(item.title.toLowerCase(), filter);
+            });
+        }
+    }, ViewModel);
+
+    self.stringStartsWith = function(string, startsWith) {
+        string = string || "";
+        if (startsWith.length > string.length)
+            return false;
+        return string.substring(0, startsWith.length) === startsWith;
+    };
+
 
     this.triggerClick = function(marker) {
         google.maps.event.trigger(marker, 'click');

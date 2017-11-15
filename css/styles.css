@@ -49,6 +49,10 @@ body, html {
     margin-left: 50px;
 }
 
+.sidenav input {
+    margin-left: 12px;
+}
+
 #header {
     padding-top: 8px;
     padding-bottom: 8px;
