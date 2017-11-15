@@ -53,6 +53,10 @@ body, html {
     margin-left: 12px;
 }
 
+#filterResults {
+    width: 205px;
+}
+
 #header {
     padding-top: 8px;
     padding-bottom: 8px;
