@@ -24,9 +24,13 @@ var ViewModel = function() {
     };
 
     this.showAllResults = function() {
+
+        self.filter("");
+
         self.markersArray().forEach(function(marker) {
             marker.setVisible(true);
         });
+        self.openNav();
         document.getElementById("showAllResults").style.display = "none";
     };
 
@@ -53,6 +57,10 @@ var ViewModel = function() {
             self.markersArrayFiltered().forEach(function(marker) {
                 marker.setVisible(false);
             });
+
+            if (largeInfowindow) {
+                largeInfowindow.close();
+            }
 
             let results = ko.utils.arrayFilter(self.markersArray(), function(item) {
                 return self.stringStartsWith(item.title.toLowerCase(), filter);

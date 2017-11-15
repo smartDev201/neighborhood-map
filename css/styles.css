@@ -83,6 +83,7 @@ body, html {
     padding-top: 61px;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    white-space: nowrap;
 }
 
 #map {
@@ -96,8 +97,8 @@ body, html {
     background: black;
     color: white;
     border: black;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding-top: 6.2px;
+    padding-bottom: 6.2px;
     cursor: pointer;
     display: none;
 }
