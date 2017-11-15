@@ -24,14 +24,16 @@ body, html {
 .sidenav ul {
     color: white;
     list-style: none;
-    display: block;
     padding-left: 12px;
+    display: block;
 }
 
 .sidenav li {
     padding: 12px 0;
     cursor: pointer;
     transition: 0.3s;
+    display: block;
+    width: 220px;
 }
 
 .sidenav li:hover {
