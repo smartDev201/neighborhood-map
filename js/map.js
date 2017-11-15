@@ -1,6 +1,7 @@
 let map;
 let service;
 let markers = [];
+let largeInfowindow;
 //let places = [];
 
 function initMap() {
@@ -48,7 +49,7 @@ function populateInfoWindow(marker, infowindow) {
 function callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
 
-        let largeInfowindow = new google.maps.InfoWindow();
+        largeInfowindow = new google.maps.InfoWindow();
         let bounds = new google.maps.LatLngBounds();
 
         for (var i = 0; i < results.length; i++) {
@@ -105,6 +106,16 @@ function callback(results, status) {
         script = document.createElement('script');
         script.src = 'js/app.js';
         document.head.appendChild(script);
+
+        google.maps.event.addListener(map, 'click', function() {
+            if (largeInfowindow) {
+                largeInfowindow.close();
+
+                markers.forEach(function(marker) {
+                    marker.setAnimation(null);
+                });
+            }
+        });
 
     }
 
