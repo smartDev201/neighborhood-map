@@ -18,10 +18,17 @@ function initMap() {
         type: ['night_club']
     };
 
+    google.maps.event.addDomListener(window, "resize", function() {
+        var center = map.getCenter();
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(center);
+    });
+
     service = new google.maps.places.PlacesService(map);
     service.nearbySearch(request, callback);
 
 }
+
 
   // This function populates the infowindow when the marker is clicked. We'll only allow
   // one infowindow which will open at the marker that is clicked, and populate based
