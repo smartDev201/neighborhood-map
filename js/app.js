@@ -35,11 +35,27 @@ var ViewModel = function() {
     self.markersArrayFiltered = ko.computed(function() {
         let filter = self.filter().toLowerCase();
         if (!filter) {
+            self.markersArray().forEach(function(marker) {
+                marker.setVisible(true);
+            });
+
             return self.markersArray();
+
         } else {
-            return ko.utils.arrayFilter(self.markersArray(), function(item) {
+          
+            self.markersArrayFiltered().forEach(function(marker) {
+                marker.setVisible(false);
+            });
+
+            let results = ko.utils.arrayFilter(self.markersArray(), function(item) {
                 return self.stringStartsWith(item.title.toLowerCase(), filter);
             });
+
+            results.forEach(function(marker) {
+                marker.setVisible(true);
+            });
+
+            return results;
         }
     }, ViewModel);
 
