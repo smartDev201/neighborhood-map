@@ -75,10 +75,10 @@ function callback(results, status) {
                     toggleBounce(marker);
 
                 // Close info window if same marker is clicked
-                } else {
-                    largeInfowindow.close();
-                    toggleBounce(marker);
-                    largeInfowindow.marker = null;
+//                } else {
+//                    largeInfowindow.close();
+//                    toggleBounce(marker);
+//                    largeInfowindow.marker = null;
                 }
             });
 

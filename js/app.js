@@ -62,6 +62,9 @@ var ViewModel = function() {
                 largeInfowindow.close();
             }
 
+            clearAllAnimations();
+            largeInfowindow.marker = null;
+
             // Show Show All Results button
             document.getElementById("showAllResults").style.display = "inherit";
 
