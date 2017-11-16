@@ -2,19 +2,27 @@ var ViewModel = function() {
 
     let self = this;
 
-    /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
-    this.openNav = function() {
+    // Open sidebar
+    self.openNav = function() {
         document.getElementById("mySidenav").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";
     };
 
-    /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-    this.closeNav = function() {
+    // Close sidebar
+    self.closeNav = function() {
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
     };
 
-    this.showAllResults = function() {
+    self.markersArray = ko.observableArray([]);
+
+    // Push all marker instances to markersArray observable array
+    markers.forEach(function(place) {
+        self.markersArray.push(place);
+    });
+
+    // Show all markers and open sidebar when Show All Results button is clicked
+    self.showAllResults = function() {
         self.filter("");
 
         self.markersArray().forEach(function(marker) {
@@ -25,15 +33,10 @@ var ViewModel = function() {
         document.getElementById("showAllResults").style.display = "none";
     };
 
-    this.markersArray = ko.observableArray([]);
+    self.filter = ko.observable("");
 
-    markers.forEach(function(place) {
-        self.markersArray.push(place);
-    });
-
-    this.filter = ko.observable("");
-
-    // Filter the items using the filter text
+    // Filter the items using the filter text, adopted from
+    // http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
     self.markersArrayFiltered = ko.computed(function() {
         let filter = self.filter().toLowerCase();
         if (!filter) {
@@ -71,7 +74,7 @@ var ViewModel = function() {
         return string.substring(0, startsWith.length) === startsWith;
     };
 
-    this.triggerClick = function(marker) {
+    self.triggerClick = function(marker) {
         google.maps.event.trigger(marker, 'click');
         self.closeNav();
         document.getElementById("showAllResults").style.display = "inherit";
