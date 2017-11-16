@@ -1,12 +1,3 @@
-//var Place = function(data) {
-//    this.title = ko.observable(data.title);
-//    this.vicinity = ko.observable(data.vicinity);
-//    this.position = ko.observable(data.position);
-//    this.map = ko.observable(data.map);
-//    animation: google.maps.Animation.DROP,
-//    id: i
-//}
-
 var ViewModel = function() {
 
     let self = this;
@@ -24,12 +15,12 @@ var ViewModel = function() {
     };
 
     this.showAllResults = function() {
-
         self.filter("");
 
         self.markersArray().forEach(function(marker) {
             marker.setVisible(true);
         });
+
         self.openNav();
         document.getElementById("showAllResults").style.display = "none";
     };
@@ -53,7 +44,6 @@ var ViewModel = function() {
             return self.markersArray();
 
         } else {
-
             self.markersArrayFiltered().forEach(function(marker) {
                 marker.setVisible(false);
             });
@@ -81,35 +71,11 @@ var ViewModel = function() {
         return string.substring(0, startsWith.length) === startsWith;
     };
 
-
     this.triggerClick = function(marker) {
         google.maps.event.trigger(marker, 'click');
         self.closeNav();
         document.getElementById("showAllResults").style.display = "inherit";
     };
-
-
-//    this.addPlacesArray = function() {
-//        console.log(placesArray());
-//    };
-
-
-//    var self = this;
-
-
-//    initialCats.forEach(function(catItem) {
-//        self.catList.push(new Cat(catItem));
-//    });//
-
-//    this.currentCat = ko.observable( this.catList()[0] );//
-
-//    this.incClickCount = function() {
-//        self.currentCat().clickCount(self.currentCat().clickCount() + 1);
-//    };//
-
-//    this.updateCurrentCat = function() {
-//        self.currentCat(this);
-//    };
 
 }
 

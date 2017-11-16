@@ -2,7 +2,6 @@ let map;
 let service;
 let markers = [];
 let largeInfowindow;
-//let places = [];
 
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
@@ -31,16 +30,6 @@ function initMap() {
 function populateInfoWindow(marker, infowindow) {
     // Check to make sure the infowindow is not already opened on this marker.
 
-//    let request = {
-//      method: 'GET',
-//      client_id: 'S5A3QSAZPWULTNNOTN2QL0NPX4SG1OR5QRFTATHHPO4GXZEN',
-//      client_secret: 'DU0Z30UIE1PSCVHQT4DSOMGWRZTQKPAXTFBQXY3ZUZYQWFHO',
-//      ll: '40.7243,-74.0018',
-//      query: 'coffee',
-//      v: '20170801',
-//      limit: 1
-//    };
-
     fetch(`https://api.foursquare.com/v2/venues/search?v=20170801&near=Amsterdam&query=${marker.title}&limit=1&client_id=S5A3QSAZPWULTNNOTN2QL0NPX4SG1OR5QRFTATHHPO4GXZEN&client_secret=DU0Z30UIE1PSCVHQT4DSOMGWRZTQKPAXTFBQXY3ZUZYQWFHO`).then(function(response) {
         return response.json();
     })
@@ -50,16 +39,6 @@ function populateInfoWindow(marker, infowindow) {
         thisInfoWindow.insertAdjacentHTML('beforeend', `<span>${checkinsCount} check-ins via <a href="https://foursquare.com/">Foursquare</a></span>`);
         console.log(checkinsCount);
     });
-//    , function(err, res, body) {
-//      if (err) {
-//        console.error(err);
-//      } else {
-//        console.log(body);
-//      }
-//    });
-
-
-
 
     let content = `<div class="infowindow">
             <h3>${marker.title}</h3><br>
@@ -78,7 +57,6 @@ function populateInfoWindow(marker, infowindow) {
     }
 }
 
-
 function callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
 
@@ -96,13 +74,6 @@ function callback(results, status) {
 
             let title = results[i].name;
             let vicinity = results[i].vicinity;
-
-//            let place = {
-//                title: title,
-//                vicinity: vicinity
-//            };
-
-//            places.push(place);
 
             let marker = new google.maps.Marker({
                 position: myLatLng,
@@ -149,9 +120,7 @@ function callback(results, status) {
                 });
             }
         });
-
     }
-
 }
 
 function toggleBounce(marker) {
