@@ -2,8 +2,19 @@ let map;
 let service;
 let markers = [];
 let largeInfowindow;
+let isMapsApiLoaded = false;
+
+function doesMapLoad() {
+    if (isMapsApiLoaded === false) {
+        map = document.getElementById('map');
+        map.insertAdjacentHTML('beforeend', `<p class="googleMapsFail">Failed to load Google Maps data. Check your Internet connection.</p>`);
+    }
+}
+
+window.setTimeout(doesMapLoad, 5000);
 
 function initMap() {
+    isMapsApiLoaded = true;
     // Constructor creates a new map - only center and zoom are required.
     let amsterdam = new google.maps.LatLng(52.3702, 4.8952);
 
