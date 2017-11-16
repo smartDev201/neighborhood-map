@@ -30,24 +30,46 @@ function initMap() {
 function populateInfoWindow(marker, infowindow) {
     // Check to make sure the infowindow is not already opened on this marker.
 
-    fetch(`https://api.foursquare.com/v2/venues/search?v=20170801&near=Amsterdam&query=${marker.title}&limit=1&client_id=S5A3QSAZPWULTNNOTN2QL0NPX4SG1OR5QRFTATHHPO4GXZEN&client_secret=DU0Z30UIE1PSCVHQT4DSOMGWRZTQKPAXTFBQXY3ZUZYQWFHO`).then(function(response) {
-        return response.json();
-    })
-    .then(function(response) {
-        let checkinsCount = response.response.venues[0].stats.checkinsCount;
-        let thisInfoWindow = document.querySelector('.infowindow');
-        thisInfoWindow.insertAdjacentHTML('beforeend', `<span>${checkinsCount} check-ins via <a href="https://foursquare.com/">Foursquare</a></span>`);
-        console.log(checkinsCount);
-    });
-
     let content = `<div class="infowindow">
             <h3>${marker.title}</h3><br>
             ${marker.vicinity}<br>
-        </div>`
+        </div>`;
 
     if (infowindow.marker != marker) {
         infowindow.marker = marker;
         infowindow.setContent(content);
+
+        let url = `https://api.foursquare.com/v2/venues/search?v=20170801&near=Amsterdam&query=${marker.title}&limit=1&client_id=S5A3QSAZPWULTNNOTN2QL0NPX4SG1OR5QRFTATHHPO4GXZEN&client_secret=DU0Z30UIE1PSCVHQT4DSOMGWRZTQKPAXTFBQXY3ZUZYQWFHO`;
+
+        fetch(url).then(function(response) {
+            return response.json();
+        })
+        .then(function(response) {
+            let checkinsCount = response.response.venues[0].stats.checkinsCount;
+            let website = "";
+            if (response.response.venues[0].url) {
+                website = `<br><a class="website" href="${response.response.venues[0].url}" target="_blank">Link to Website</a>`;
+            };
+
+            let thisInfoWindow = document.querySelector('.infowindow');
+            thisInfoWindow.insertAdjacentHTML('beforeend', `<span>
+                ${checkinsCount} check-ins via <a class="foursquare" href="https://foursquare.com/" target="_blank">Foursquare</a>
+                </span>
+                ${website}`);
+            console.log(checkinsCount);
+
+            if (website) {
+                let websiteLink = document.querySelector(".website");
+                websiteLink.addEventListener('click', function() {
+                    window.open(this.href);
+                });
+            }
+
+            let foursquareLink = document.querySelector(".foursquare");
+            foursquareLink.addEventListener('click', function() {
+                window.open(this.href);
+            });
+        });
 
         infowindow.open(map, marker);
         // Make sure the marker property is cleared if the infowindow is closed.
