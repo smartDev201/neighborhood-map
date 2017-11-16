@@ -97,6 +97,6 @@ var ViewModel = function() {
         document.getElementById("showAllResults").style.display = "inherit";
     };
 
-}
+};
 
 ko.applyBindings(new ViewModel());
