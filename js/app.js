@@ -30,15 +30,19 @@ var ViewModel = function() {
         });
 
         self.openNav();
+
+        // Hide Show All Results button
         document.getElementById("showAllResults").style.display = "none";
     };
 
     self.filter = ko.observable("");
 
-    // Filter the items using the filter text, adopted from
+    // Filter list items using the input text, adopted from
     // http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
     self.markersArrayFiltered = ko.computed(function() {
         let filter = self.filter().toLowerCase();
+
+        // If no input text, make all markers visible & show all list items
         if (!filter) {
             self.markersArray().forEach(function(marker) {
                 marker.setVisible(true);
@@ -46,7 +50,10 @@ var ViewModel = function() {
 
             return self.markersArray();
 
+        // If user types in input field
         } else {
+
+            // First, hide all markers and close info window, if open
             self.markersArrayFiltered().forEach(function(marker) {
                 marker.setVisible(false);
             });
@@ -55,12 +62,15 @@ var ViewModel = function() {
                 largeInfowindow.close();
             }
 
+            // Show Show All Results button
             document.getElementById("showAllResults").style.display = "inherit";
 
+            // Show only list items that start with the input field text
             let results = ko.utils.arrayFilter(self.markersArray(), function(item) {
                 return self.stringStartsWith(item.title.toLowerCase(), filter);
             });
 
+            // Show markers only for filtered results
             results.forEach(function(marker) {
                 marker.setVisible(true);
             });
@@ -69,6 +79,7 @@ var ViewModel = function() {
         }
     }, ViewModel);
 
+    // Return true if list item starts with input field text
     self.stringStartsWith = function(string, startsWith) {
         string = string || "";
         if (startsWith.length > string.length)
@@ -76,6 +87,7 @@ var ViewModel = function() {
         return string.substring(0, startsWith.length) === startsWith;
     };
 
+    // Trigger marker click when clicking list item in sidebar
     self.triggerClick = function(marker) {
         google.maps.event.trigger(marker, 'click');
         self.closeNav();
