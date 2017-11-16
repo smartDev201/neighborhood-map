@@ -55,6 +55,8 @@ var ViewModel = function() {
                 largeInfowindow.close();
             }
 
+            document.getElementById("showAllResults").style.display = "inherit";
+
             let results = ko.utils.arrayFilter(self.markersArray(), function(item) {
                 return self.stringStartsWith(item.title.toLowerCase(), filter);
             });
