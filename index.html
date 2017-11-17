@@ -10,7 +10,7 @@
     <body>
 
         <!-- Sidebar adopted from https://www.w3schools.com/howto/howto_js_sidenav.asp-->
-        <div id="mySidenav" class="sidenav">
+        <div id="mySidenav" class="sidenav" data-bind="style: { width: openbtnIsClicked() === true ? '250px' : '0' }">
             <span class="closebtn" data-bind="click: closeNav">&#9776;</span>
             <span><input id="filterResults" data-bind="value: filter, valueUpdate: 'afterkeydown'" placeholder="Filter results"></span>
             <ul id="list" data-bind="foreach: markersArrayFiltered">
@@ -23,7 +23,7 @@
             <span class="headerTitle"><h1>Amsterdam Eats</h1></span>
         </div>
 
-        <div id="main">
+        <div id="main" data-bind="style: { marginLeft: openbtnIsClicked() === true ? '250px' : '0' }">
             <div id="map" data-bind="click: closeNav">
             </div>
             <button id="showAllResults" name="showAllResults" type="button" data-bind="click: showAllResults">Show All Results</button>

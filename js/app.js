@@ -1,17 +1,19 @@
 var ViewModel = function() {
 
     let self = this;
+    self.openbtnIsClicked = ko.observable(false);
 
     // Open sidebar
     self.openNav = function() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
+        self.openbtnIsClicked(true);
+//        document.getElementById("mySidenav").style.width = "250px";
+//        document.getElementById("main").style.marginLeft = "250px";
     };
 
     // Close sidebar
     self.closeNav = function() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
+//        document.getElementById("mySidenav").style.width = "0";
+//        document.getElementById("main").style.marginLeft = "0";
     };
 
     self.markersArray = ko.observableArray([]);
