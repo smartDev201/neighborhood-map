@@ -4,8 +4,8 @@ var ViewModel = function() {
     self.openbtnIsClicked = ko.observable(false);
 
     // Open & close sidebar
-    self.openNav = () => { self.openbtnIsClicked(true) };
-    self.closeNav = () => { self.openbtnIsClicked(false) };
+    self.openNav = () => { self.openbtnIsClicked(true); };
+    self.closeNav = () => { self.openbtnIsClicked(false); };
 
     self.markersArray = ko.observableArray([]);
 
