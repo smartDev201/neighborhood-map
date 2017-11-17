@@ -12,7 +12,8 @@ var ViewModel = function() {
 
     // Close sidebar
     self.closeNav = function() {
-//        document.getElementById("mySidenav").style.width = "0";
+        self.openbtnIsClicked(false);
+///        document.getElementById("mySidenav").style.width = "0";
 //        document.getElementById("main").style.marginLeft = "0";
     };
 
