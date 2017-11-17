@@ -3,19 +3,8 @@ var ViewModel = function() {
     let self = this;
     self.openbtnIsClicked = ko.observable(false);
 
-    // Open sidebar
-    self.openNav = function() {
-        self.openbtnIsClicked(true);
-//        document.getElementById("mySidenav").style.width = "250px";
-//        document.getElementById("main").style.marginLeft = "250px";
-    };
-
-    // Close sidebar
-    self.closeNav = function() {
-        self.openbtnIsClicked(false);
-///        document.getElementById("mySidenav").style.width = "0";
-//        document.getElementById("main").style.marginLeft = "0";
-    };
+    self.openNav = () => { self.openbtnIsClicked(true) }; // Open sidebar
+    self.closeNav = () => { self.openbtnIsClicked(false) }; // Close sidebar
 
     self.markersArray = ko.observableArray([]);
 
