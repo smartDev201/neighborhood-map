@@ -2,22 +2,15 @@ let map;
 let service;
 let markers = [];
 let largeInfowindow;
-let isMapsApiLoaded = false;
 
 // Error handling when Google Maps API fails to load
-function doesMapLoad() {
-    if (isMapsApiLoaded === false) {
-        map = document.getElementById('map');
-        map.insertAdjacentHTML('beforeend', `<p class="googleMapsFail">Failed to load Google Maps data. Check your Internet connection.</p>`);
-    }
+function mapLoadError() {
+    map = document.getElementById('map');
+    map.insertAdjacentHTML('beforeend', `<p class="googleMapsFail"><em>Failed to load Google Maps data.</em></p>`);
 }
-
-window.setTimeout(doesMapLoad, 5000);
 
 // Callback function to initialize map
 function initMap() {
-    isMapsApiLoaded = true;
-
     let amsterdam = new google.maps.LatLng(52.3702, 4.8952);
 
     map = new google.maps.Map(document.getElementById('map'), {
