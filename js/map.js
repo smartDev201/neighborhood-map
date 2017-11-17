@@ -150,11 +150,13 @@ function populateInfoWindow(marker, infowindow) {
                     website = `<br><a class="website" href="${data.response.venues[0].url}" target="_blank">Link to Website</a>`;
                 };
 
-                // Append number of check-ins, Foursquare and website link to info window
-                thisInfoWindow.insertAdjacentHTML('beforeend', `<span>
+                content += `<span>
                     ${checkinsCount} check-ins via <a class="foursquare" href="https://foursquare.com/" target="_blank">Foursquare</a>
                     </span>
-                    ${website}`);
+                    ${website}`;
+
+                // Append number of check-ins, Foursquare and website link to info window
+                infowindow.setContent(content);
 
                 // Add click event listeners to info window links
                 if (website) {
